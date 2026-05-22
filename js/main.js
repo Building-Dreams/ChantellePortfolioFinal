@@ -51,3 +51,48 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 450);
     });
 });
+
+
+// Language switcher: Dutch / English
+const languageButtons = document.querySelectorAll(".lang-toggle");
+
+function setLanguage(language) {
+    const elements = document.querySelectorAll("[data-nl][data-en]");
+
+    elements.forEach((element) => {
+        element.textContent = element.dataset[language];
+    });
+
+    document.documentElement.lang = language;
+    document.documentElement.style.setProperty(
+        "--typewriter-1",
+        language === "nl" ? '"Student"' : '"A Student"'
+    );
+    document.documentElement.style.setProperty(
+        "--typewriter-2",
+        language === "nl" ? '"Harde werker"' : '"A Hard Worker"'
+    );
+    document.documentElement.style.setProperty(
+        "--typewriter-3",
+        language === "nl" ? '"Toekomstige engineer"' : '"A Future Engineer"'
+    );
+
+    localStorage.setItem("language", language);
+
+    languageButtons.forEach((button) => {
+        button.textContent = language === "nl" ? "EN" : "NL";
+    });
+}
+
+languageButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const currentLanguage = localStorage.getItem("language") || "nl";
+        const newLanguage = currentLanguage === "nl" ? "en" : "nl";
+        setLanguage(newLanguage);
+    });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const savedLanguage = localStorage.getItem("language") || "nl";
+    setLanguage(savedLanguage);
+});
