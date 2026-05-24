@@ -96,3 +96,10 @@ window.addEventListener("DOMContentLoaded", () => {
     const savedLanguage = localStorage.getItem("language") || "nl";
     setLanguage(savedLanguage);
 });
+
+if (typeof AOS !== "undefined") {
+    AOS.init({
+        offset: 0
+    });
+}
+
